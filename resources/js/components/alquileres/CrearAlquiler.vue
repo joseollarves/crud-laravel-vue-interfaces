@@ -1,37 +1,70 @@
 <script setup>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router'
-
-let form = ref({
-    nombre: '',
-    estado: '',
-})
+import { onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 const usuarioId = JSON.parse(document.head.querySelector('meta[name="user"]').content);
 
 const router = useRouter();
 
-const onPerfil = () => {
-    router.push('/perfil/' + usuarioId);
+//const onPerfil = () => {
+//    router.push('/perfil/' + usuarioId);
+//}
+
+let clientes = ref([])
+let vehiculos = ref([])
+
+let form = ref({
+    cliente: '',
+    vehiculo: '',
+    fecha_desde: '',
+    fecha_hasta: '',
+    precio: '',
+    estado: ''
+})
+
+onMounted(async () => {
+    getDatos()
+})
+
+const getDatos = async () => {
+
+    await axios.get('api/get_usuarios')
+        .then(function (response) {
+            clientes.value = response.data.usuarios
+        })
+
+    await axios.get('api/get_vehiculos')
+        .then(function (response) {
+            vehiculos.value = response.data.vehiculos
+        })
+    console.log('usuarios', clientes.value)
+    console.log('vehiculos', vehiculos.value)
 }
 
-const registrarTipo = () => {
+const registrarAlquiler = () => {
     const formData = new FormData();
-    formData.append('nombre', form.value.nombre);
+    formData.append('cliente', form.value.cliente);
+    formData.append('vehiculo', form.value.vehiculo);
+    formData.append('fecha_desde', form.value.fecha_desde);
+    formData.append('fecha_hasta', form.value.fecha_hasta);
+    formData.append('precio', form.value.precio);
     formData.append('estado', form.value.estado);
 
-    axios.post('api/add_tipo', formData)
+    axios.post('api/add_alquiler', formData)
         .then((response) => {
-            form.value.nombre = '',
+            form.value.cliente = '',
+                form.value.vehiculo = '',
+                form.value.fecha_desde = '',
+                form.value.fecha_hasta = '',
+                form.value.precio = '',
                 form.value.estado = '',
-                console.log(response)
-                router.push('/tipos')
+                router.push('/ListaAlquilados')
         })
         .catch((error) => {
-            console.log(error.message)
+            console.log(error.response)
         })
-
 }
+
 </script>
 
 <template>
@@ -105,36 +138,63 @@ const registrarTipo = () => {
                 <div class="container-fluid">
                     <div class="row">
                         <!-- /.col-md-6 -->
-                        <div class="col-lg">
+                        <div class="col-lg-6">
                             <div class="card card-primary card-outline">
                                 <div class="card-header">
-                                    <h3 class="card-title">Datos</h3>
+                                    <h3 class="card-title">Nuevo Alquiler</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
                                 <form>
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Nombre del Tipo</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1"
-                                                placeholder="" v-model="form.nombre">
+                                            <label for="exampleInputEmail1">Cliente</label>
+                                            <div class="input-group">
+                                                <select class="custom-select" v-model="form.cliente">
+                                                    <option v-for="cliente in clientes" :key="cliente.id">{{ cliente.name }}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Vehiculo</label>
+                                            <div class="input-group">
+                                                <select class="custom-select" v-model="form.vehiculo">
+                                                    <option v-for="vehiculo in vehiculos" :key="vehiculo.id">{{ vehiculo.marca }} {{ vehiculo.modelo }}</option>
+                                                </select>
+                                            </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Estado del Tipo</label>
+                                            <label for="exampleInputEmail1">Fecha Desde</label>
+                                            <input type="date" class="form-control" id="exampleInputEmail1"
+                                                placeholder="" v-model="form.fecha_desde">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Fecha Hasta</label>
+                                            <input type="date" class="form-control" id="exampleInputEmail1"
+                                                placeholder="" v-model="form.fecha_hasta">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Precio</label>
+                                            <input type="number" class="form-control" id="exampleInputEmail1"
+                                                placeholder="" v-model="form.precio">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Estado</label>
                                             <select class="custom-select" v-model="form.estado">
                                                 <option>Activo</option>
                                                 <option>Inactivo</option>
                                             </select>
                                         </div>
                                     </div>
+                                    <!-- /.card-body -->
                                     <div class="card-footer">
-                                        <button class="btn btn-primary" type="button" @click="registrarTipo()">Guardar</button>
+                                        <button type="button" class="btn btn-primary"
+                                            @click="registrarAlquiler()">Guardar</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
-
-                        <!-- /.col-md-6 -->
                     </div>
                     <!-- /.row -->
                 </div><!-- /.container-fluid -->
@@ -166,3 +226,5 @@ const registrarTipo = () => {
         </footer>
     </div>
 </template>
+
+

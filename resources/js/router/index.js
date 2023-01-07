@@ -12,6 +12,11 @@ import Tipos from '../components/tipos/Tipos.vue'
 import RegistrarTipo from '../components/tipos/RegistrarTipo.vue'
 import EditarTipo from '../components/tipos/EditarTipo.vue'
 
+import ListaAlquilados from '../components/alquileres/ListaAlquilados.vue'
+import CrearAlquiler from '../components/alquileres/CrearAlquiler.vue'
+import EditarAlquiler from '../components/alquileres/EditarAlquiler.vue'
+import Factura from '../components/alquileres/Factura.vue'
+
 const routes = [
     {
         path: '/home',
@@ -59,9 +64,29 @@ const routes = [
         path: '/editarTipo/:id',
         component: EditarTipo,
         props: true
+    },
+
+    {
+        path: '/ListaAlquilados',
+        component: ListaAlquilados
+    },
+
+    {
+        path: '/CrearAlquiler',
+        component: CrearAlquiler
+    },
+
+    {
+        path: '/EditarAlquiler/:id',
+        component: EditarAlquiler,
+        props: true
+    },
+
+    {
+        path: '/verFactura/:id',
+        component: Factura,
+        props: true
     }
-
-
 ]
 
 const router = createRouter({

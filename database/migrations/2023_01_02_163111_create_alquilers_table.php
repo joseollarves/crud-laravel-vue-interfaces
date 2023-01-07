@@ -13,17 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('vehiculos', function (Blueprint $table) {
+        Schema::create('alquilers', function (Blueprint $table) {
             $table->id();
-            $table->string('marca');
-            $table->string('modelo');
-            $table->integer('placa');
-            $table->string('color');
-            $table->string('tipo');
+            $table->string('cliente');
+            $table->string('vehiculo');
+            $table->date('fecha_desde');
+            $table->date('fecha_hasta');
+            $table->integer('precio');
             $table->string('estado');
-            $table->string('foto_primera');
-            $table->string('foto_segunda');
-            $table->string('foto_tercera');
             $table->timestamps();
         });
     }
@@ -35,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vehiculos');
+        Schema::dropIfExists('alquilers');
     }
 };

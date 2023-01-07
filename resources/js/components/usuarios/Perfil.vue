@@ -165,6 +165,14 @@ const actualizarPerfil = () => {
                                 </p>
                             </router-link>
                         </li>
+                        <li class="nav-item">
+                            <router-link to="/ListaAlquilados" class="nav-link" style="cursor: pointer;">
+                                <i class="fas fa-car"></i>
+                                <p>
+                                    Vehiculos alquilados
+                                </p>
+                            </router-link>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

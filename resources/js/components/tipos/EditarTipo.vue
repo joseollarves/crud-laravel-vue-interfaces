@@ -91,6 +91,14 @@ const editarTipo = () => {
                                 </p>
                             </router-link>
                         </li>
+                        <li class="nav-item">
+                            <router-link to="/ListaAlquilados" class="nav-link" style="cursor: pointer;">
+                                <i class="fas fa-car"></i>
+                                <p>
+                                    Vehiculos alquilados
+                                </p>
+                            </router-link>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -137,7 +145,8 @@ const editarTipo = () => {
                                         </div>
                                     </div>
                                     <div class="card-footer">
-                                        <button type="button" class="btn btn-primary" @click="editarTipo()">Editar</button>
+                                        <button type="button" class="btn btn-primary"
+                                            @click="editarTipo()">Editar</button>
                                     </div>
                                 </form>
                             </div>
