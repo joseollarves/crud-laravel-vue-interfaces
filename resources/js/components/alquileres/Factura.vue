@@ -54,111 +54,83 @@ const PDF = () => {
 </script>
 
 <template>
-    <div class="wrapper">
-        <!-- Content Wrapper. Contains page content -->
+    <div class="invoice p-3 mb-3">
 
-        <div style="min-height: 465px;">
-            <!-- Content Header (Page header) -->
-            <div id="contenido">
-                <div class="content-header">
-                    <div class="container">
-                        <div class="row mb-2">
+        <div class="row mb-2" style="margin-left:-300px; padding-bottom: 10px;">
 
-                            <div class="col-sm-1">
-                                <img src="../../../../public/favicon.ico" alt="AdminLTE Logo"
-                                    class="brand-image img-circle elevation-3"
-                                    style="opacity: .8; height: 80px; width: 80px;">
-                            </div><!-- /.col -->
-                            <div class="col-sm-6">
-                                Jack Rental - Alquiler de Vehiculos<br>
-                                New Shioya Heights 1F, Wakayama<br>
-                                Contacto: +81 73-496-2043
-                            </div><!-- /.col -->
-                        </div><!-- /.row -->
-                    </div><!-- /.container-fluid -->
+            <div class="col-sm-1">
+                <img src="../../../../public/favicon.ico" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                    style="opacity: .8; height: 80px; width: 80px;">
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                Jack Rental - Alquiler de Vehiculos<br>
+                New Shioya Heights 1F, Wakayama<br>
+                Contacto: +81 73-496-2043
+            </div><!-- /.col -->
+
+        </div>
+
+
+        <div class="card-body">
+            <table class="table table-bordered" style="margin-bottom: 10px;">
+                <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>Vehiculo</th>
+                        <th>Desde</th>
+                        <th>Hasta</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ alquiler.id }}</td>
+                        <td>{{ alquiler.vehiculo }}</td>
+                        <td>{{ alquiler.fecha_desde }}</td>
+                        <td>{{ alquiler.fecha_desde }}</td>
+                        <td>{{ alquiler.precio }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row" style="margin-top:30px;">
+            <div class="col-6">
+                <div class="table">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th style="width:50%">Subtotal:</th>
+                                <td>{{ alquiler.precio }} $</td>
+                            </tr>
+                            <tr>
+                                <th>IVA (16%)</th>
+                                <td>{{ alquiler.precio * 0.16 }} $</td>
+                            </tr>
+                            <tr>
+                                <th>Total:</th>
+                                <td>{{ alquiler.precio * 0.16 }} $</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <!-- /.content-header -->
-
-                <!-- Main content -->
-                <div class="content">
-                    <div class="container">
-                        <div class="row">
-                            <!-- /.col-md-6 -->
-                            <div class="col-lg-12">
-                                <div class="card card-primary card-outline">
-                                    <div class="card-header">
-                                        <div class="card-tools">
-                                            <div class="input-group input-group-sm" style="width: 150px;">
-                                                <div class="input-group-append">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- /.card-header -->
-                                    <div class="card-body">
-                                        <table class="table table-bordered" style="margin-bottom: 10px;">
-                                            <thead>
-                                                <tr>
-                                                    <th>N°</th>
-                                                    <th>Vehiculo</th>
-                                                    <th>Desde</th>
-                                                    <th>Hasta</th>
-                                                    <th>Precio /
-                                                        Dia
-                                                    </th>
-                                                    <th style="width: 150px;">Total</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>{{ alquiler.id }}</td>
-                                                    <td>{{ alquiler.vehiculo }}</td>
-                                                    <td>{{ alquiler.fecha_desde }}</td>
-                                                    <td>{{ alquiler.fecha_hasta }}</td>
-                                                    <td>{{ alquiler.precio }}</td>
-                                                    <td>{{ alquiler.precio }}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="bg-gray py-2 px-3 mt-4">
-                                        <h4 class="mt-0">
-                                            <small>Subtotal: $- {{ alquiler.precio }}</small>
-                                        </h4>
-                                        <h4 class="mt-0">
-                                            <small>IVA: $- {{ alquiler.precio }}</small>
-                                        </h4>
-                                        <h4 class="mt-0">
-                                            <small>Total: $- {{ alquiler.precio }}</small>
-                                        </h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.col-md-6 -->
-                        </div>
-
-                        <div class="btn-group">
-                            <button @click="PDF" type="button" class="btn btn-default"
-                                style="margin-top: 50px; border-color: black;">Imprimir</button>
-                        </div>
-
-                        <!-- Main Footer -->
-                    </div>
-                </div>
-
-                <!-- ./wrapper -->
-                <footer class="main-footer">
-                    <!-- To the right -->
-                    <div class="float-right d-none d-sm-inline">
-                        HEE-HO!
-                    </div>
-                    <!-- Default to the left -->
-                    <strong>Copyright &copy; 2022 <a href="https://youtu.be/UTH1VNHLjng">Jack's Rentals</a>.</strong>
-                    Todos
-                    los derechos
-                    reservados.
-                </footer>
+            </div>
+        </div>
+        <div class="row no-print">
+            <div class="col-12">
+                <a onclick="window.print()" rel="noopener" target="_blank" class="btn btn-default"><i
+                        class="fas fa-print"></i> Imprimir</a>
             </div>
         </div>
     </div>
+
+    <footer class="main-footer">
+        <!-- To the right -->
+        <div class="float-right d-none d-sm-inline">
+            HEE-HO!
+        </div>
+        <!-- Default to the left -->
+        <strong>Copyright © 2022-2023 <a href="https://youtu.be/wZmsy1k1_t0">Jack's Rentals</a>.</strong> Todos los derechos reservados.
+    </footer>
+
 </template>
