@@ -31,6 +31,10 @@ const getAlquileres = async () => {
     console.log('alquileres', alquileres.value)
 }
 
+const onPerfil = () => {
+    router.push('/perfil/' + usuarioId);
+}
+
 const cambiarEstadoActivo = (id) => {
     axios.get(`/api/estado_activo_alquiler/${id}`)
         .then(() => {
@@ -87,7 +91,7 @@ $(document).ready(function () {
                             </router-link>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" @click="onPerfil">
+                            <a @click="onPerfil" class="nav-link" style="cursor: pointer;">
                                 <i class="fas fa-id-card"></i>
                                 <p>
                                     Perfil

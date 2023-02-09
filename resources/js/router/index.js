@@ -17,6 +17,8 @@ import CrearAlquiler from '../components/alquileres/CrearAlquiler.vue'
 import EditarAlquiler from '../components/alquileres/EditarAlquiler.vue'
 import Factura from '../components/alquileres/Factura.vue'
 
+import Principal from '../components/Principal.vue'
+
 const routes = [
     {
         path: '/home',
@@ -86,6 +88,11 @@ const routes = [
         path: '/verFactura/:id',
         component: Factura,
         props: true
+    },
+
+    {
+        path: '/',
+        component: Principal
     }
 ]
 

@@ -131,20 +131,8 @@ const eliminarUsuario = (id) => {
                                                     <div class="btn-group">
                                                         <button type="button" class="btn btn-default"
                                                             @click="eliminarUsuario(usuario.id)">Eliminar</button>
-                                                        <div class="btn-group">
-                                                            <button type="button"
-                                                                class="btn btn-default dropdown-toggle"
-                                                                data-toggle="dropdown" aria-expanded="false">Cambiar
-                                                                Estado</button>
-                                                            <ul class="dropdown-menu" style="">
-                                                                <li><a class="dropdown-item" href="#">Activo</a></li>
-                                                                <li><a class="dropdown-item" href="#">Inactivo</a></li>
-                                                            </ul>
-                                                        </div>
-                                                        <button type="button" class="btn btn-default">Editar
-                                                            Rol</button>
-                                                        <button type="button" class="btn btn-default">Ver
-                                                            Perfil</button>
+                                                        <a @click="onPerfil()" type="button" class="btn btn-default">Ver
+                                                            Perfil</a>
                                                     </div>
                                                 </td>
                                             </tr>

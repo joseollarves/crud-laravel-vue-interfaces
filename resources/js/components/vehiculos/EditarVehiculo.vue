@@ -15,10 +15,10 @@ let form = ref({
     foto_tercera: ''
 })
 let tipos = ref([])
+let vehiculo = ref([])
 
 onMounted(async () => {
-    get_vehiculo();
-    //getTipos();
+    getDatos()
 })
 
 
@@ -43,12 +43,18 @@ const get_vehiculo = async () => {
     form.value = response.data.vehiculo
 }
 
-const getTipos = async () => {
+const getDatos = async () => {
 
-    let response = await axios.get('api/get_tipos')
-    tipos.value = response.data.tipos
-    //console.log('tipos', tipos.value)
-}
+    await axios.get(`/api/get_vehiculo/${props.id}`)
+        .then(function (response) {
+            form.value = response.data.vehiculo
+        })
+
+    await axios.get('/api/get_tipos')
+        .then(function (response) {
+            tipos.value = response.data.tipos
+        })
+    }
 
 const getFotoPrimera = () => {
     let foto_primera = '/upload/image.png';
@@ -153,11 +159,10 @@ const editarVehiculo = () => {
                 form.value.foto_segunda = '',
                 form.value.foto_tercera = '',
                 router.push('/listaVehiculos')
-        })
-        .catch((error) => {
-            console.log(error.response)
-        })
-}
+            }).catch((error) => {
+                console.log(error.response)
+            })
+        }
 
 </script>
 
@@ -498,4 +503,5 @@ img {
 .demo:hover {
     opacity: 1;
 }
+
 </style>

@@ -274,7 +274,7 @@ const actualizarPerfil = () => {
                                             <label for="exampleInputFile">Foto de licencia</label>
                                             <div
                                                 style="display: flex; text-align: center; justify-content: center; align-items: center; margin-bottom: 10px;">
-                                                <img :src="getFotoLicencia()" alt=""
+                                                <img :src="getFotoLicencia()"
                                                     style="height: 200px; width: 400px; box-shadow: 0px 0px 10px 2px;" />
                                             </div>
                                             <div class="input-group">
